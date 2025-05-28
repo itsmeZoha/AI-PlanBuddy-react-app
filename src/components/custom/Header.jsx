@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import images2 from './../../assets/images2.png';
-import { Button } from "./../ui/Button";
+import { Button } from "./../ui/button";
 import { useUser } from './../../contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
 import {
