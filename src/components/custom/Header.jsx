@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import images2 from './../../assets/images2.png';
 import { Button } from '@/components/ui/button';
 import { useUser } from './../../contexts/UserContext';
-import { useNavigate } from 'react-router-dom';
 import {
   Popover,
   PopoverContent,
@@ -20,7 +19,7 @@ import axios from 'axios';
 
 function Header() {
   const { user, setUser } = useUser();
-  const [openDailog, setOpenDailog] = useState(false);
+ const [openDialog, setOpenDialog] = useState(false);
 
   const GetUserProfile = async (tokenInfo) => {
     try {
@@ -34,7 +33,7 @@ function Header() {
       localStorage.setItem('user', JSON.stringify(resp.data));
       setUser(resp.data); 
        window.location.reload();
-      setOpenDailog(false);
+      setOpenDialog(false);
     } catch (error) {
       console.error("Failed to get user profile:", error);
     }
@@ -53,7 +52,6 @@ function Header() {
     googleLogout();
     localStorage.clear();
     setUser(null);  
-    navigate('/');
      window.location.reload(); 
   };
 
@@ -81,21 +79,23 @@ function Header() {
                 <img src={user?.picture} className='h-[35px] w-[35px] rounded-full' />
               </PopoverTrigger>
               <PopoverContent>
-            <a href='/'>
-                <h2 className='cursor-pointer text-[#095771] hover:text-[#095771]' onClick={handleLogout}>Logout</h2>
-            </a>
+            
+                <h2 className='cursor-pointer text-[#095771] hover:text-[#095771]' onClick={() => {
+                                    handleLogout();
+                                    window.location.href = '/'; 
+                                    }}>Logout</h2>
               </PopoverContent>
             </Popover>
           </div>
         ) : (
           <Button className="text-[#095771] px-4 py-2 rounded"
             style={{ backgroundColor: '#6acaea' }}
-            onClick={() => setOpenDailog(true)}>
+            onClick={() => setOpenDialog(true)}>
             Sign In
           </Button>
         )}
       </div>
-      <Dialog open={openDailog} onOpenChange={setOpenDailog}>
+      <Dialog open={openDialog} onOpenChange={setOpenDialog}>
         <DialogContent>
           <DialogHeader>
             <DialogDescription>
