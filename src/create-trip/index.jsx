@@ -157,6 +157,7 @@ const SaveAiTrip = async (TripDataRaw) => {
 
   setLoading(false);
   navigate('/view-trip/' + docId);
+
 };
 
 
@@ -211,8 +212,8 @@ const GetUserProfile = async (tokenInfo) => {
           }} />
         </div>
         <div>
-        <h2 className='text-xl my-3 font-medium'>How many das are you planning your trips?</h2>
-        <Input placeholder={'Ex.3'} type='number' 
+        <h2 className='text-xl my-3 font-medium'>How many day are you planning your trips?</h2>
+        <Input placeholder={'Ex.3'} type='number' min="0" 
         onChange={(e)=>handleInputChange('noOfDays',e.target.value)} />
 
         </div>
@@ -254,9 +255,7 @@ const GetUserProfile = async (tokenInfo) => {
       <div className="my-10 justify-end flex">
         <Button disabled={loading} className="text-white"
       style={{ backgroundColor: "#095771" }}
-      onClick={OnGenerateTrip
-        
-      }
+      onClick={OnGenerateTrip}
       
       >  {loading?
       <AiOutlineLoading3Quarters className='h-7 w-7 animate-spin' />:"Generate Trip"
@@ -288,7 +287,7 @@ const GetUserProfile = async (tokenInfo) => {
 
     </div>
     
-  )
+  );
 }
 
 export default CreateTrip
